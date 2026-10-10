@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="default_flipendo_enabled_flag">true</bool>
+    <bool name="unified_battery_saver_enabled_flag">false</bool>
+</resources>

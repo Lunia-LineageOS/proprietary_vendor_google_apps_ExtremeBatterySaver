@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="onboarding_description_margin_top">16dp</dimen>
+    <dimen name="settings_allowlist_icon_size">32dp</dimen>
+</resources>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.google.android.flipendo">
+
+    <uses-permission android:name="android.permission.READ_DEVICE_CONFIG" />
+    <uses-permission android:name="android.permission.SUSPEND_APPS" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.REAL_GET_TASKS" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <uses-permission android:name="android.permission.QUERY_USERS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
+    <uses-permission android:name="android.permission.MANAGE_USERS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.MODIFY_QUIET_MODE" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_PROFILES" />
+    <uses-permission android:name="android.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS" />
+    <uses-permission android:name="android.permission.TETHER_PRIVILEGED" />
+    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED" />
+    <uses-permission android:name="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" />
+    <uses-permission android:name="com.google.android.settings.intelligence.BATTERY_DATA" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_DIM_AMOUNT" />
+    <uses-permission android:name="android.permission.MANAGE_DISPLAYS" />
+
+    <permission
+        android:name="com.google.android.flipendo.SAVER_STATE_UPDATE"
+        android:protectionLevel="signatureOrSystem" />
+    <permission
+        android:name="com.google.android.flipendo.START_SAVER_CONFIRMATION"
+        android:protectionLevel="signatureOrSystem" />
+
+    <uses-permission android:name="com.google.android.flipendo.SAVER_STATE_UPDATE" />
+
+    <application
+        android:allowBackup="true"
+        android:backupAgent=".backup.ExtremeBatterySaverBackupAgentHelper"
+        android:crossProfile="true"
+        android:directBootAware="true"
+        android:fullBackupOnly="false"
+        android:icon="@drawable/ic_launcher_settings"
+        android:label="@string/app_label"
+        android:restoreAnyVersion="true"
+        android:supportsRtl="true"
+        android:theme="@style/FlipendoMainTheme">
+
+        <activity
+            android:name=".onboarding.ExtremeBatterySaverOnboardingActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label=""
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:supportsRtl="true"
+            android:theme="@style/FlipendoOnboardingTheme">
+            <intent-filter>
+                <action android:name="android.settings.batterysaver.flipendo.onboarding" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.AllowedAppListSelectionActivity"
+            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
+            android:enabled="@bool/default_flipendo_enabled_flag"
+            android:exported="true"
+            android:label="@string/extreme_battery_saver_label"
+            android:supportsRtl="true">
+            <intent-filter>
+                <action android:name="android.settings.batterysaver.flipendo" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".receiver.LockedBootCompletedBroadcastReceiver"
+            android:exported="false">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".receiver.BootCompletedBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".receiver.PowerSaveModeChangedBroadcastReceiver"
+            android:exported="false">
+            <intent-filter android:priority="999">
+                <action android:name="android.os.action.POWER_SAVE_MODE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".workprofile.WorkProfileTurnedOnBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MANAGED_PROFILE_AVAILABLE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".workprofile.WorkProfileTurnedOffBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MANAGED_PROFILE_UNAVAILABLE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".suspend.AppManuallyUnsuspendedBroadcastReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".suspend.KeepUnpausedBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_UNSUSPENDED_MANUALLY" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".suspend.UpdateResuspendStateBroadcastReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".workprofile.UpdateWorkProfileStateBroadcastReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".receiver.testing.ChangeSavingsModeSettingBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.flipendo.SET_MODE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".receiver.testing.ChangeAllowedAppListBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.flipendo.ALLOW" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".receiver.testing.ChangeAppPauseBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.flipendo.PAUSE" />
+                <action android:name="com.google.android.flipendo.UNPAUSE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Stock also declares .receiver.TurnedOnNotificationClickedBroadcastReceiver here,
+             but that class doesn't exist in the stock APK. -->
+
+        <receiver
+            android:name=".notification.ChannelsLocaleReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".receiver.TurnOnWorkProfileBroadcastReceiver"
+            android:exported="false" />
+
+        <provider
+            android:name=".bugreport.BugReportContentProvider"
+            android:authorities="com.google.android.flipendo.bug_report_provider"
+            android:exported="false" />
+
+        <service
+            android:name=".receiver.FutureForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="systemExempted" />
+
+        <service
+            android:name=".suspend.AllowedAppListCleaningJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <provider
+            android:name=".settings.SettingsSummaryContentProvider"
+            android:authorities="com.google.android.flipendo.settings.SettingsSummaryContentProvider"
+            android:exported="false" />
+
+        <provider
+            android:name=".api.FlipendoStateContentProvider"
+            android:authorities="com.google.android.flipendo.api"
+            android:exported="true" />
+
+        <provider
+            android:name=".settings.AllowedAppListSearchProvider"
+            android:authorities="com.google.android.flipendo.settings.AllowedAppListSearchProvider"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.READ_SEARCH_INDEXABLES">
+            <intent-filter>
+                <action android:name="android.content.action.SEARCH_INDEXABLES_PROVIDER" />
+            </intent-filter>
+        </provider>
+    </application>
+</manifest>

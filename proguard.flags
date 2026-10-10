@@ -1,0 +1,4 @@
+# Protobuf lite messages look up their fields reflectively.
+-keepclassmembers class * extends com.google.protobuf.GeneratedMessageLite {
+    <fields>;
+}

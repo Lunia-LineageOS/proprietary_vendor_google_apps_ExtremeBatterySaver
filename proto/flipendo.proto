@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package com.google.android.flipendo;
+
+option java_multiple_files = true;
+
+enum InternalState {
+    UNKNOWN = 1;
+    ENABLED = 2;
+    DISABLED = 3;
+}
+
+message HistoricalLogEntry {
+    optional int64 timestamp = 1;
+    optional InternalState state = 2;
+    optional bool direct_boot = 3;
+    optional string source = 4;
+    optional string timestamp_local = 5;
+    optional bool power_save_mode = 6;
+}
+
+message HistoricalLog {
+    repeated HistoricalLogEntry log_entry = 1;
+}

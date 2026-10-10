@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FlipendoMainTheme" parent="@style/Theme.SubSettingsBase" />
+
+    <style name="FlipendoOnboardingTheme" parent="@style/Theme.SubSettingsBase">
+        <item name="android:clipChildren">true</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="preferenceFragmentCompatStyle">@style/OnboardingPreferenceFragmentStyle</item>
+    </style>
+
+    <style name="FlipendoOnboardingTheme.Expressive" parent="@style/Theme.SubSettingsBase.Expressive">
+        <item name="android:clipChildren">true</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="preferenceFragmentCompatStyle">@style/OnboardingPreferenceFragmentStyle</item>
+    </style>
+
+    <style name="OnboardingPreferenceFragmentStyle" parent="@style/PreferenceFragment.Material">
+        <item name="android:layout">@layout/extreme_battery_saver_onboarding_activity_layout</item>
+    </style>
+</resources>

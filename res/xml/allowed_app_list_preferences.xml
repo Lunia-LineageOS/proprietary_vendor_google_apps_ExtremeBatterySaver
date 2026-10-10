@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="allowed_app_list"
+    android:title="@string/extreme_battery_saver_label">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="@string/allowed_app_list_information_header_key"
+        android:selectable="false"
+        android:title="@string/allowed_app_list_information_header" />
+
+    <com.android.settingslib.widget.UntitledPreferenceCategory android:key="allowed_app_list_apps">
+
+        <androidx.preference.PreferenceCategory
+            android:key="allowed_app_list_essential_apps"
+            android:order="0"
+            android:title="@string/allowed_app_list_essential_apps" />
+
+        <androidx.preference.PreferenceCategory
+            android:key="allowed_app_list_non_essential_apps"
+            android:order="1000"
+            android:title="@string/allowed_app_list_non_essential_apps" />
+
+        <com.android.settingslib.widget.SettingsSpinnerPreference
+            android:key="filter_spinner"
+            android:order="1001" />
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
+</androidx.preference.PreferenceScreen>

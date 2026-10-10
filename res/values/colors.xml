@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="google_blue300">#8ab4f8</color>
+    <color name="google_blue500">#4285f4</color>
+    <color name="icon_launcher_setting_color">@*android:color/accent_device_default_light</color>
+</resources>

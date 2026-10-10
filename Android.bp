@@ -1,0 +1,46 @@
+aconfig_declarations {
+    name: "flipendo_flags",
+    package: "com.google.android.flipendo",
+    container: "system_ext",
+    srcs: ["aconfig/flipendo.aconfig"],
+}
+
+java_aconfig_library {
+    name: "flipendo_flags_lib",
+    aconfig_declarations: "flipendo_flags",
+}
+
+android_app {
+    name: "Flipendo",
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+        "proto/**/*.proto",
+    ],
+    proto: {
+        type: "lite",
+    },
+    resource_dirs: ["res"],
+    use_resource_processor: true,
+    platform_apis: true,
+    target_sdk_version: "35",
+    certificate: "platform",
+    system_ext_specific: true,
+    static_libs: [
+        "SettingsLib",
+        "SettingsLibActivityEmbedding",
+        "android.frameworks.stats-V2-java",
+        "androidx.annotation_annotation",
+        "androidx.core_core",
+        "androidx.fragment_fragment",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "flipendo_flags_lib",
+        "guava",
+        "setupcompat",
+        "setupdesign",
+    ],
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}

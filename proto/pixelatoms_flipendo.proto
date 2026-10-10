@@ -1,0 +1,89 @@
+// Flipendo atom enums from Google's internal pixelatoms.proto, which isn't
+// part of AOSP's hardware/google/pixel/pixelstats/pixelatoms.proto.
+syntax = "proto2";
+
+package android.hardware.google.pixel.vendor.PixelAtoms;
+
+option java_package = "android.hardware.google.pixel.vendor";
+option java_outer_classname = "PixelAtoms";
+
+message FlipendoEnabled {
+    enum State {
+        UNKNOWN = 0;
+        OFF = 1;
+        ON = 2;
+    }
+
+    enum Type {
+        UNKNOWN_TYPE = 0;
+        BOOT_COMPLETED = 1;
+        NORMAL = 2;
+    }
+}
+
+message FlipendoEssentialAppsChange {
+    enum Type {
+        UNKNOWN = 0;
+        WHITELISTED = 1;
+        NOT_WHITELISTED = 2;
+    }
+}
+
+message FlipendoAppUnsuspended {
+    enum Type {
+        UNKNOWN = 0;
+        UNSUSPENDED = 1;
+        TIMER_EXTENDED = 2;
+        KEPT_UNPAUSED_FOR_SESSION = 3;
+    }
+}
+
+message FlipendoUIElementAction {
+    enum UIElement {
+        UNKNOWN_TYPE = 0;
+        NOTIFICATION_PROMO = 1;
+        NOTIFICATION_MODE_ENABLED = 2;
+        NOTIFICATION_APPS_RESUSPENSION = 3;
+        NOTIFICATION_SETTINGS_UPDATE = 4;
+        DIALOG_INTRO = 5;
+        DIALOG_APPS_RESUSPENSION = 6;
+        EDUCATION_FLOW = 7;
+        NOTIFICATION_ASK_TO_ENABLE = 8;
+        ONBOARDING_INTRO = 9;
+        ONBOARDING_ALLOW_APPS = 10;
+        NOTIFICATION_WORK_PROFILE_SUSPENSION = 11;
+    }
+
+    enum Action {
+        UNKNOWN_ACTION = 0;
+        SHOWN = 1;
+        NOTIFICATION_CLICKED = 2;
+        NOTIFICATION_DISMISSED = 3;
+        CANCEL_CLICKED = 4;
+        TURN_ON_CLICKED = 5;
+        PAUSE_CLICKED = 6;
+        GOT_IT_CLICKED = 7;
+        LEARN_MORE_CLICKED = 8;
+        NEXT_CLICKED = 9;
+        KEEP_UNPAUSED_CLICKED = 10;
+        EXTEND_TIMER_CLICKED = 11;
+        MANAGE_SETTINGS_CLICKED = 12;
+    }
+}
+
+message FlipendoUpdateTimeElapsed {
+    enum Type {
+        UNKNOWN = 0;
+        ENABLED = 1;
+        DISABLED = 2;
+    }
+}
+
+message FlipendoWorkProfileTurnedOff {
+    enum Type {
+        UNKNOWN = 0;
+        RIGHT_AWAY = 1;
+        AFTER_DELAY = 2;
+        MANUALLY = 3;
+    }
+}

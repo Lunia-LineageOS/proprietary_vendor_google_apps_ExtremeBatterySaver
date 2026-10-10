@@ -1,0 +1,9 @@
+package: "com.google.android.flipendo"
+container: "system_ext"
+
+flag {
+    name: "disable_battery_saver_manager_for_additional_profile"
+    namespace: "pixel_energizer"
+    description: "Disables BatterySaverManager for additional profile"
+    bug: "429524930"
+}
